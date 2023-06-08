@@ -1,0 +1,109 @@
+<div class="div_parent_modal">
+
+    <header class="modalheader">
+        <div class="div_modalHeader">
+            <div class="col-lg-4 col-md-10 col-xs-10 col-sm-10 div_accountsettingsParent_heading padding-0">
+                <!-- <div (click)="onClickBack()" class="t6USZF"><a class="_2qhTFB _2nu1E8 _13c7RA "><span
+                            class="_3Q2N2k _30vxLD _3s37z7 _2zhJTq _3N7UZQ"><svg viewBox="0 0 18 18"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8.80367158,16.7638261 C9.06544281,17.0467987 9.06544281,17.5049548 8.80367158,17.7879275 C8.54229164,18.0704815 8.11774488,18.0709001 7.85597365,17.7879275 L0.196328421,9.51223382 C-0.0654428068,9.22926119 -0.0654428068,8.77068646 0.196328421,8.48771383 L7.85577801,0.212229473 C8.11754924,-0.0707431577 8.54170471,-0.0707431577 8.80347594,0.212229473 C9.06524716,0.495202104 9.06524716,0.953567534 8.80406287,1.23633087 L1.81841007,9.00007847 L8.80367158,16.7638261 Z">
+                                </path>
+                            </svg></span>Back</a></div> -->
+                <!-- <div class="t6USZF">Password Settings</div> -->
+                <span class="heading_modal">Register</span>
+            </div>
+
+        </div>
+    </header>
+
+    <ng-container *ngIf="step===1">
+        <div class="col-lg-12 div_modal_form">
+            <div class="col-lg-12 div_client_basicInfo">
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 social_login">
+                    <app-gmail-login></app-gmail-login>
+                </div>
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 social_login">
+                    <app-facebook-login></app-facebook-login>
+                </div>
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
+                    <div (click)="signInOptions()" class="t6USZF"><a class="_2qhTFB _2nu1E8 _13c7RA "><span
+                                class="_3Q2N2k _30vxLD _3s37z7 _2zhJTq _3N7UZQ"></span>Sign in ?</a></div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="step===2">
+        <form [formGroup]="userRegisterForm">
+            <div class="col-lg-12 div_modal_form">
+                <div class="col-lg-12 div_signup_basicInfo">
+                    <div class="col-lg-12 form-group">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>First Name</mat-label>
+                            <input required matInput formControlName="firstNameFormControl"
+                                [(ngModel)]="patient.user.firstName">
+                            <mat-error
+                                *ngIf="userRegisterForm.controls['firstNameFormControl'].invalid
+                    && (userRegisterForm.controls['firstNameFormControl'].dirty || userRegisterForm.controls['firstNameFormControl'].touched)">
+                                First Name is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Last Name</mat-label>
+                            <input required matInput formControlName="lastNameFormControl"
+                                [(ngModel)]="patient.user.lastName">
+                            <mat-error
+                                *ngIf="userRegisterForm.controls['lastNameFormControl'].invalid
+                    && (userRegisterForm.controls['lastNameFormControl'].dirty || userRegisterForm.controls['lastNameFormControl'].touched)">
+                                Last Name is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Mobile Number</mat-label>
+                            <input required matInput formControlName="mobileNumberFormControl"
+                                [(ngModel)]="patient.user.mobileNumber">
+                            <mat-error *ngIf="userRegisterForm.controls['mobileNumberFormControl'] !== null && userRegisterForm.controls['mobileNumberFormControl'].errors !== null && 
+                            userRegisterForm.controls['mobileNumberFormControl'].errors['required']">
+                                Mobile Number is required
+                            </mat-error>
+                            <mat-error *ngIf="userRegisterForm.controls['mobileNumberFormControl'] !== null && userRegisterForm.controls['mobileNumberFormControl'].errors !== null && 
+                            userRegisterForm.controls['mobileNumberFormControl'].errors['pattern']">
+                                Mobile Number is not valid
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Email</mat-label>
+                            <input required matInput formControlName="EmailFormControl" [(ngModel)]="patient.user.email">
+                            <mat-error *ngIf="userRegisterForm.controls['EmailFormControl'] !== null && userRegisterForm.controls['EmailFormControl'].errors !== null && 
+                        userRegisterForm.controls['EmailFormControl'].errors['required']">
+                                Email is required
+                            </mat-error>
+                            <mat-error *ngIf="userRegisterForm.controls['EmailFormControl'] !== null && userRegisterForm.controls['EmailFormControl'].errors !== null && 
+                        userRegisterForm.controls['EmailFormControl'].errors['pattern']">
+                                Email is not valid
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        <button [disabled]="showLoading" mat-button
+                            class="btn_actions button-with-blackcolor float-right box-shadow" matTooltip="SAVE"
+                            (click)="onSubmit()">REGISTER <mat-icon *ngIf="showLoading">
+                                <mat-spinner color="accent" diameter="20">
+                                </mat-spinner>
+                            </mat-icon></button>
+                        <button [disabled]="showLoading" mat-button
+                            class="btn_actions float-right btn_min-width box-shadow" (click)="cancelSignup()"
+                            matTooltip="CANCEL">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+</div>

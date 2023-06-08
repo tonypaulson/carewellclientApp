@@ -1,0 +1,9 @@
+{
+    "api": {
+      "carewell": "https://localhost:44308/carewell/api",
+      "dateformat": "dd/MM/yyyy"
+    },
+    "baseurl": "http://localhost:4200",
+    "videoservicebaseurl": "https://cwldevtwillio.herokuapp.com",
+    "bookingurl": "http://{{companyName}}.dev.carewell.com:5003"
+  }

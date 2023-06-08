@@ -1,0 +1,538 @@
+
+<!-- <ng-container *ngIf="!showLoading">
+    <div id="div_main_enduser">        
+        <div class="navcust container">
+            <input type="checkbox" id="nav-check">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 nav-header" style="float: left;">
+                <div class="nav-title">
+                    <ng-container *ngIf="accountSettings !== undefined && accountSettings !== null 
+                    && accountSettings.companyDetails !== undefined && accountSettings.companyDetails !== null && accountSettings.companyDetails.companylogo !== undefined
+                    && accountSettings.companyDetails.companylogo !== null">
+                        <img style="width: 34px; height: 34px;" [src]="accountSettings.companyDetails.companylogo">
+                    </ng-container>
+                </div>
+            </div>
+            <div class="nav-btn">
+                <label for="nav-check">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+
+            <div class="col-lg-8 col-md-8 d-none d-xl-block aos-init aos-animate nav-links" style="
+    text-align: center!important; float: left;
+">
+                <a href="#home" data-value="home">Home</a>
+                <a href="#about" data-value="about">About</a>
+                <a href="#contactus" data-value="contactus">Contact Us</a>
+            </div>
+
+       
+        </div>
+
+        <ng-container *ngIf="company_banner_Image !== undefined && company_banner_Image !== ''">
+            <div class="parallax" id="home" [ngStyle]="{'background-image': 'url(' + company_banner_Image + ')'}">
+                <div class="col-lg-7 col-md-7 col-xs-10 col-sm-10 caption overlay">
+                    <h5 class="bannermainheading">{{accountSettings.companyDetails.companyTitle}}</h5>
+                    <h2 class="bannersubheading">We are here for your care</h2>
+                    <span class="color-white">{{accountSettings.companyDetails.companySubtitle}}
+                    </span>
+                    <p>
+                        <button class="btn btn-black py-3 px-5" (click)="NewAppointmentPopupOnClick()">Book
+                            Now!</button>
+                    </p>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="site-section" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 text-center">
+                        <h1 class="line-height-1 mb-3"><span class="d-block display-4 line-height-1"><em
+                                    class="text-primary font-weight-bold">{{accountSettings.companyDetails.companyTitle}}</em></span>
+                        </h1>
+                        <p>{{accountSettings.companyDetails.companySubtitle}}</p>
+                        <p><a href="#"><small class="text-uppercase font-weight-bold">Read More</small></a></p>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4"></div>
+
+                    <div class="col-md-6 col-lg-4 text-center">
+                     
+
+                        <div class="col-md-12 col-lg-12">
+                            <div class="border p-4 d-flex align-items-center justify-content-center h-100">
+                                <div class="text-center">
+                                    <h2 class="text-primary h2 mb-5"><span class="span_icon"><i class="fa fa-clock-o"
+                                                aria-hidden="true"></i></span>Opening Hours</h2>
+
+                                    <div class="padding-left-right-10px display_grid"
+                                        *ngFor="let bh of accountSettings.businessHours; let i= index">
+                                        <p class="mb-2">
+                                            <span class="text-center float-left"
+                                                [ngClass]="{'font-weight-bold' : isCurrentDay(bh.day)}">{{bh.day}}
+                                            </span>
+                                            <span class="text-right float-right"
+                                                [ngClass]="{'color-red' : bh.workingTime.selectedStartTime === null || bh.workingTime.selectedStartTime === undefined, 'font-weight-bold' : isCurrentDay(bh.day)}">
+                                                {{bh.workingTime.selectedStartTime === null || bh.workingTime.selectedStartTime === undefined ? 'Closed':  bh.workingTime.selectedStartTime +' - '+ bh.workingTime.selectedEndTime}}
+                                            </span>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <hr />
+        </div>
+
+        <div class="site-section" id="contactus">
+            <div class="container_">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 text-center">
+                        <h1 class="line-height-1 mb-3 text-primary"><span
+                                class="d-block display-4 line-height-1">Contact
+                                Us</span>
+                        </h1>
+                        <p class="subText">Have any questions? We'd love to hear from you.</p>
+                    </div>
+
+
+                    <div class="col-md-12 col-lg-12 text-center">
+                        <div class="col-md-2 col-lg-2 text-center"></div>
+                        <div class="col-md-10 col-lg-10 text-center">
+                            <div class="col-lg-3 col-sm-12 div_contact_main">
+                                <div class="div_contactsection_icons d-flex align-items-center justify-content-center">
+                                    <span class="icon-signs"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                </div>
+                                <h3>Address</h3>
+                                <p class="subText">{{accountSettings.companyDetails.address}},
+                                    {{accountSettings.companyDetails.city}} {{accountSettings.companyDetails.zip}}</p>
+                            </div>
+
+
+                            <div class="col-lg-3 col-sm-12 div_contact_main">
+                                <div class="div_contactsection_icons d-flex align-items-center justify-content-center">
+                                    <span class="icon-signs"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                </div>
+                                <h3>Contact Number</h3>
+                                <p class="subText">{{accountSettings.companyDetails.phone}}</p>
+                            </div>
+
+
+                            <div class="col-lg-3 col-sm-12 div_contact_main">
+                                <div class="div_contactsection_icons d-flex align-items-center justify-content-center">
+                                    <span class="icon-signs"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+                                </div>
+                                <h3>Email Address</h3>
+                                <p class="subText">{{accountSettings.companyDetails.email}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="parallax_foooter" [ngStyle]="{'background-image': 'url(' + company_banner_Image + ')'}">
+                <div class="overlay_footer">
+                    <span style="position: relative;
+            top: 200px;">Copyright © 2019 {{accountSettings.companyDetails.companyName}} | All rights reserved</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</ng-container> -->
+
+
+<!-- <body> -->
+    <div id="div_maincust">
+        <!-- Header Section Start -->
+        <header #home id="home" data-stellar-background-ratio="0.5"
+          [ngStyle]="{'background': 'url(' + company_banner_Image + ') fixed no-repeat'}"
+          style="background-position: center !important;">
+          <!-- Navbar Start -->
+          <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar indigo">
+            <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <!-- <a class="navbar-brand"><img  class="img-fulid logo_header_img" style="height:75px"
+                    [src]="accountSettings.companyDetails.companylogo" alt=""></a> -->
+                    <a href="index.html" class="navbar-brand"><img  class="img-fulid logo_header_img" style="height:75px"
+                    src="assets/images/logo_pract.png" alt="" ></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar"
+                  aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                  <i class="lnr lnr-menu"></i>
+                </button>
+              </div>
+              <div class="collapse navbar-collapse" id="main-navbar">
+                <ul class="navbar-nav mr-auto w-100 justify-content-end">
+                  <li class="nav-item">
+                    <a class="nav-link page-scroll" [ngClass]="{'active': _activeSection === 'home'}" href="#home">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#aboutus" [ngClass]="{'active': _activeSection === 'aboutus'}">About
+                      Us</a>
+                  </li>
+                  <li class="nav-item" *ngIf="serviceByCatogery != undefined && serviceByCatogery !== null && serviceByCatogery.length > 0;" >
+                    <a class="nav-link page-scroll" href="#services"
+                      [ngClass]="{'active': _activeSection === 'services'}">Services</a>
+                  </li>
+                  <li *ngIf="(accountSettings.companyDetails.address !== '' && accountSettings.companyDetails.address !== undefined && accountSettings.companyDetails.address !== null)
+                  || (accountSettings.companyDetails.city !== '' && accountSettings.companyDetails.city !== undefined && accountSettings.companyDetails.city !== null)
+                  || (accountSettings.companyDetails.zip !== '' && accountSettings.companyDetails.zip !== undefined && accountSettings.companyDetails.zip !== null)" class="nav-item">
+                    <a class="nav-link page-scroll" href="#contact "
+                      [ngClass]="{'active': _activeSection === 'contact'}">Contact</a>
+                  </li>
+      
+                </ul>
+              </div>
+            </div>
+            <div class="navbar-headerupdated" style="text-align: right;" *ngIf="accountSettings.companyDetails !== null && accountSettings.companyDetails !== undefined && accountSettings.companyDetails.phone !== null && 
+            accountSettings.companyDetails.phone !== undefined && accountSettings.companyDetails.phone !== ''">
+              <span class="nav-link" style="font-weight: 100;
+              letter-spacing: 3px;"><span style="color: #61d2b4;position: relative;top: 3px"><i class="fa fa-phone" style="font-weight: 900;
+          font-size: 20px;"></i></span><span style="color: #61d2b4;">
+                  {{accountSettings.companyDetails.phone}}</span></span>
+            </div>
+      
+            <!-- Mobile Menu Start -->
+            <ul class="mobile-menu">
+              <li>
+                <a class="page-scroll" href="#home">Home</a>
+              </li>
+              <li>
+                <a class="page-scroll" href="#aboutus">About Us</a>
+              </li>
+              <li *ngIf="serviceByCatogery != undefined && serviceByCatogery !== null && serviceByCatogery.length > 0;">
+                <a class="page-scroll" href="#services">Services</a>
+              </li>
+              
+              <li *ngIf="(accountSettings.companyDetails.address !== '' && accountSettings.companyDetails.address !== undefined && accountSettings.companyDetails.address !== null)
+              || (accountSettings.companyDetails.city !== '' && accountSettings.companyDetails.city !== undefined && accountSettings.companyDetails.city !== null)
+              || (accountSettings.companyDetails.zip !== '' && accountSettings.companyDetails.zip !== undefined && accountSettings.companyDetails.zip !== null)">
+                <a class="page-scroll" href="#contact">Contact</a>
+              </li>
+            </ul>
+            <!-- Mobile Menu End -->
+      
+          </nav>
+          <!-- Navbar End -->
+      
+          <div class="container" style="margin-left: inherit;">
+            <div class="row justify-content-md-center">
+              <div class="col-md-10">
+                 
+                <ng-container *ngIf="accountSettings.companyDetails.companyTitle !== null
+                  && accountSettings.companyDetails.companyTitle !== undefined
+                  && accountSettings.companyDetails.companyTitle !== ''; else notitle_template">
+                  <div class="contents">
+                    <div style="background: rgb(7 7 7 / 50%);
+                    padding: 50px;
+                    
+                    border-top-right-radius: 25px;
+                    border-bottom-left-radius: 25px; word-wrap:break-word;">
+                      <h1 class="wow-fadeInDown" data-wow-duration="1000ms" data-wow-delay="0.3s">
+                       {{accountSettings.companyDetails.companyTitle}}</h1>
+                      <p class="lead-wow-fadeIn" data-wow-duration="1000ms" line-height= "normal" data-wow-delay="400ms">
+                        {{accountSettings.companyDetails.companySubtitle}}</p>
+                      <a [routerLink]="routerPath.EndUserBooking" class="btn btn-common wow fadeInUp"
+                        data-wow-duration="1000ms" data-wow-delay="400ms">Book
+                        Now</a>
+                    </div>
+                  </div>
+                </ng-container>
+                
+                <ng-template #notitle_template>
+                  <div class="contents" style="margin-bottom: 20mm;">
+                    <div style="background: rgb(7 7 7 / 50%);
+                    padding: 50px;
+                    border-top-right-radius: 25px;
+                    border-bottom-left-radius: 25px;word-wrap:break-word;">
+                      <h1 class="wow fadeInDown" data-wow-duration="1000ms"data-wow-delay="0.3s">Welcome to
+                       {{accountSettings.companyDetails.companyName}}</h1>
+                      <p class="lead  wow fadeIn" data-wow-duration="1000ms" line-height= "normal" data-wow-delay="400ms">
+                        {{accountSettings.companyDetails.companySubtitle}}</p>
+                      <a [routerLink]="routerPath.EndUserBooking" class="btn btn-common wow fadeInUp"
+                        data-wow-duration="1000ms" data-wow-delay="400ms">Book
+                        Now</a>
+                    </div>
+                  </div>
+                </ng-template>
+                
+      
+              </div>
+            </div>
+          </div>
+        </header>
+        <!-- Header Section End -->
+      
+        <!-- Portfolio Section -->
+        <section #aboutus id="aboutus" class="section">
+          <!-- Container Starts -->
+          <div class="container">
+            <div class="section-header">
+              <h2 class="section-title" style="color: #61D2B4 !important;">About Us</h2>
+              <hr class="lines">
+              <!-- <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, dignissimos!
+                <br>
+                Lorem ipsum dolor sit amet, consectetur.</p> -->
+            </div>
+            <div class="row">
+      
+              <div class="col-md-6 col-lg-6" style="word-wrap: break-word;">
+                <!-- <h4 class="line-height-1 mb-3"><span class="d-block display-4 line-height-1">Welcome
+                    to</span><span class="d-block display-4 line-height-1"><em
+                      class="text-primary font-weight-bold">{{accountSettings.companyDetails.companyName}}</em></span>
+                </h4> -->
+                <p style="text-align: justify;" *ngIf="showReadMore" [innerHtml]="companyDesc[0]"></p>
+                <p style="text-align: justify;" *ngIf="!showReadMore" [innerHtml]="accountSettings.companyDetails.companyDescription"></p>
+                <button *ngIf="isLengthyDesc" class="read-more-btn" (click)="showLengthyContentInCompDesc()">{{readBtnLabel}}</button>
+                
+              </div>
+      
+              <div class="col-md-6 col-lg-6 text-center">
+                <div class="col-md-12 col-lg-12">
+                  <div class="border p-4 d-flex align-items-center justify-content-center h-100">
+                    <div class="col-lg-8 text-center">
+                      <h4 style="color: #61D2B4 !important;font-size: 20px;" class="item-boxes h4"><span class="span_icon"><i
+                            class="fa fa-clock-o" aria-hidden="true"></i></span>Opening Hours</h4>
+      
+                      <div class="padding-left-right-10px display_grid"
+                        *ngFor="let bh of accountSettings.businessHours; let i= index">
+                        <p class="mb-2">
+                          <span class="text-center float-left"
+                            [ngClass]="{'font-weight-bold' : isCurrentDay(bh.day)}">{{bh.day}}
+                          </span>
+                          <span class="text-right float-right"
+                            [ngClass]="{'color-red' : bh.workingTime.selectedStartTime === null || bh.workingTime.selectedStartTime === undefined, 'font-weight-bold' : isCurrentDay(bh.day)}">
+                            {{bh.workingTime.selectedStartTime === null || bh.workingTime.selectedStartTime === undefined ?
+                            'Closed': bh.workingTime.selectedStartTime +' - '+ bh.workingTime.selectedEndTime}}
+                          </span>
+                        </p>
+                      </div>
+      
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+      
+            </div>
+          </div>
+          <!-- Container Ends -->
+        </section>
+        <!-- Portfolio Section Ends -->
+        
+        <section #services id="services" 
+        *ngIf="serviceByCatogery != undefined && serviceByCatogery !== null && serviceByCatogery.length > 0;" class="section">
+          <div class="section-header">
+            <h2 class="section-title" style="color: #61D2B4 !important;">Services</h2>
+            <hr class="lines">
+            <!-- <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, dignissimos!
+              <br>
+              Lorem ipsum dolor sit amet, consectetur.</p> -->
+          </div>
+          <ng-container>
+            <div id="div_userbooking_service" class="col-lg-10 col-sm-12 col-xs-12 div_userbooking_service" 
+            style="margin-left:auto; margin-right:auto; cursor: auto;">
+                
+                    <ng-container>
+                       
+                       <mat-tab-group [(selectedIndex)]="categoryTabIndex" style="cursor: auto;">
+                            <mat-tab label="{{category.catogery.name}}" *ngFor="let category of serviceByCatogery">
+                                <div id="tab_contents" class="services_list" style="cursor: auto; overflow-y: auto; max-height:1000px">
+                                    <!--  -->
+                                    <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 tab_content_items" id="{{category.catogery.name}}"
+                                        *ngFor="let service of category.services" style="cursor: auto; min-width: 300px;">
+                                        
+                                           
+                                            <div class="ervice_card_item tab-sec-width"
+                                            style="cursor: auto;  min-width: 260px; max-width:100%; word-wrap: break-word;">
+                                                
+                                                <p class="service_card_name">{{service.name}}</p>
+                                                
+                                                <p class="service-tag-description service-desc">
+                                                    {{service.description}}</p>
+                                                  
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </ng-container>
+                
+                <ng-template #showServiceLoaderTemplate>
+                    <ng-container *ngFor='let key of 5 | numberRepeater'>
+                        <ngx-content-loading [speed]="'1500ms'" [width]="1000">
+                            <svg:g ngx-rect width="1000" height="80" y="5" x="0" rx="5" ry="5"></svg:g>
+                        </ngx-content-loading>
+                    </ng-container>
+                </ng-template>
+            </div>
+      
+      
+        </ng-container>
+        </section>
+      
+        <!-- Contact Section Start -->
+        <section #contact id="contact" style="padding-top: 140px;
+        padding-bottom: 140px;" *ngIf="(accountSettings.companyDetails.address !== '' && accountSettings.companyDetails.address !== undefined && accountSettings.companyDetails.address !== null)
+        || (accountSettings.companyDetails.city !== '' && accountSettings.companyDetails.city !== undefined && accountSettings.companyDetails.city !== null)
+        || (accountSettings.companyDetails.zip !== '' && accountSettings.companyDetails.zip !== undefined && accountSettings.companyDetails.zip !== null)" class="section" data-stellar-background-ratio="-0.2">
+          <div class="contact-form">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 col-sm-6 col-xs-12">
+                  <div class="contact-us"
+                    *ngIf="(accountSettings.companyDetails.address !== '' && accountSettings.companyDetails.address !== undefined && accountSettings.companyDetails.address !== null)
+                  || (accountSettings.companyDetails.city !== '' && accountSettings.companyDetails.city !== undefined && accountSettings.companyDetails.city !== null)
+                  || (accountSettings.companyDetails.zip !== '' && accountSettings.companyDetails.zip !== undefined && accountSettings.companyDetails.zip !== null)">
+                    <h3>Contact With us</h3>
+                    <div class="contact-address">
+                      <p>
+                        <span
+                          *ngIf="accountSettings.companyDetails.address !== '' && accountSettings.companyDetails.address !== undefined && accountSettings.companyDetails.address !== null">
+                          {{accountSettings.companyDetails.address}},</span>
+                        <span
+                          *ngIf="accountSettings.companyDetails.city !== '' && accountSettings.companyDetails.city !== undefined && accountSettings.companyDetails.city !== null">
+                          {{accountSettings.companyDetails.city}} </span>
+                        <span
+                          *ngIf="accountSettings.companyDetails.zip !== '' && accountSettings.companyDetails.zip !== undefined && accountSettings.companyDetails.zip !== null">
+                          {{accountSettings.companyDetails.zip}} </span>
+                      </p>
+      
+                      <p *ngIf="accountSettings.companyDetails.phone !== ''" class="phone">Phone:
+                        <span>{{accountSettings.companyDetails.phone}}</span>
+                      </p>
+                      <p *ngIf="accountSettings.companyDetails.email !== ''" class="email">E-mail:
+                        <span>{{accountSettings.companyDetails.email}}</span>
+                      </p>
+                    </div>
+                    <div class="social-icons">
+                      <ul>
+                        <li class="facebook" *ngIf="accountSettings.companyDetails.facebookURL !== undefined && 
+                        accountSettings.companyDetails.facebookURL !== null
+                        && accountSettings.companyDetails.facebookURL !== ''"><a
+                            [href]="accountSettings.companyDetails.facebookURL" target="blank"><i
+                              class="fa fa-facebook"></i></a></li>
+                        <li class="twitter" *ngIf="accountSettings.companyDetails.twitterURL !== undefined && 
+                        accountSettings.companyDetails.twitterURL !== null
+                        && accountSettings.companyDetails.twitterURL !== ''"><a
+                            [href]="accountSettings.companyDetails.twitterURL" target="blank"><i
+                              class="fa fa-twitter"></i></a>
+                        </li>
+                        <!-- <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li class="dribbble"><a href="#"><i class="fa fa-dribbble"></i></a></li> -->
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-xs-12">
+                  <div class="contact-block" style="display: none;">
+                    <form id="contactForm">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required
+                              data-error="Please enter your name">
+                            <div class="help-block with-errors"></div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <input type="text" placeholder="Your Email" id="email" class="form-control" name="name" required
+                              data-error="Please enter your email">
+                            <div class="help-block with-errors"></div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <textarea class="form-control" id="message" placeholder="Your Message" rows="8"
+                              data-error="Write your message" required></textarea>
+                            <div class="help-block with-errors"></div>
+                          </div>
+                          <div class="submit-button text-center">
+                            <button class="btn btn-common" id="submit" type="submit">Send Message</button>
+                            <div id="msgSubmit" class="h3 text-center hidden"></div>
+                            <div class="clearfix"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Contact Section End -->
+      
+        <!-- Footer Section Start -->
+        <footer>
+          <div class="container">
+            <div class="row">
+              <!-- Footer Links -->
+              <div class="">
+                <img src="assets/images/logo_img1.png" style="width: 130px;
+                padding: 10px;
+    margin-left: 30px;">
+              </div>
+              <div class="col-lg-6 col-sm-6 col-xs-12">
+                <ul class="footer-links">
+                  <li>
+                    <a class="nav-link page-scroll" href="#home">Home</a>
+                  </li>
+                  <li>
+                    <a class="nav-link page-scroll" href="#aboutus">About Us</a>
+                  </li>
+                  <li *ngIf="serviceByCatogery != undefined && serviceByCatogery !== null && serviceByCatogery.length > 0;" >
+                    <a class="nav-link page-scroll" href="#services">Services</a>
+                  </li>
+                  <li *ngIf="(accountSettings.companyDetails.address !== '' && accountSettings.companyDetails.address !== undefined && accountSettings.companyDetails.address !== null)
+                  || (accountSettings.companyDetails.city !== '' && accountSettings.companyDetails.city !== undefined && accountSettings.companyDetails.city !== null)
+                  || (accountSettings.companyDetails.zip !== '' && accountSettings.companyDetails.zip !== undefined && accountSettings.companyDetails.zip !== null)">
+                    <a class="nav-link page-scroll" href="#contact">Contact</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6 col-sm-6 col-xs-12">
+                <div class="copyright"
+                  *ngIf="accountSettings !== undefined && accountSettings !== null && accountSettings.companyDetails !== undefined && accountSettings.companyDetails !== null && accountSettings.companyDetails.companyName !== null
+                  && accountSettings.companyDetails.companyName !== undefined && accountSettings.companyDetails.companyName !== ''">
+                  <p style="position: relative;top: 10px;">All rights reserved &copy; 2020</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <!-- Footer Section End -->
+      
+        <!-- Go To Top Link -->
+        <a href="#" class="back-to-top">
+          <i class="lnr lnr-arrow-up"></i>
+        </a>
+      
+        <div id="loader">
+          <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+          </div>
+        </div>
+      
+      </div>
+      
+      <!-- </body> -->

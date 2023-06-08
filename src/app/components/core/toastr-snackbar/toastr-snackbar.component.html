@@ -1,0 +1,28 @@
+<!-- <ng-container *ngIf="snackbarStatus === 0">
+    <span class="span_warning_mark"><i class="fa fa-check-circle-o" aria-hidden="true"></i></span>
+    <span>{{content}}</span>
+</ng-container>
+
+<ng-container *ngIf="snackbarStatus === 1">
+    <span class="span_warning_mark"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+    <span>{{content}}</span>
+</ng-container> -->
+
+<!-- <div class="mat-simple-snackbar-action" *ngIf="snackBarAction">
+    <button (click)="myAction()">{{snackBarAction}}</button>
+</div> -->
+
+
+<ng-container *ngIf="snackbarStatus === 0">
+    <div style="display: flex;"> <span class="span_warning_mark span_success_mark"><i
+                class="fa fa-check-circle-o"></i></span>
+        <span class="span_toastr_content">{{content}}</span>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="snackbarStatus === 1">
+    <div style="display: flex;">
+        <span class="span_warning_mark span_error_mark"><i class="fa fa-exclamation-triangle"></i></span>
+        <span class="span_toastr_content">{{content}}</span>
+    </div>
+</ng-container>

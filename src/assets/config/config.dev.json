@@ -1,0 +1,9 @@
+{
+    "api": {
+      "carewell": "#{ApiUrl}#",
+      "dateformat": "dd/MM/yyyy"
+    },
+    "baseurl": "#{BaseUrl}#",
+    "videoservicebaseurl": "#{Videoservicebaseurl}#",
+    "bookingurl": "http://{{companyName}}.#{Domain}#"
+  }

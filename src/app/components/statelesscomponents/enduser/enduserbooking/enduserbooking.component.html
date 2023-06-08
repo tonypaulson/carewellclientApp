@@ -1,0 +1,522 @@
+<div>
+    <div class="row">
+        <div class="div_userbooking_mainheader" *ngIf="step !== 5">
+            <a class="nav_bar_header_logo" (click)="closeBooking()"><img class="img-fulid logo_header_img" [src]="companyLogo" alt=""></a>
+            <div class="container steps-header-div" style="padding: 20px;">
+                <span class="span_steps">Step {{step}} of 4</span>
+                <h1 class="userbooking_mainheading" style="font-size: large !important;">
+                    <a *ngIf="step !== 1" data-qa="back-arrow" style="cursor: pointer;position: relative;top:4px"
+                        class="Flex-f4qjqv-0 hQZNZI Icon__IconButton-jx88m3-2 gExoan" (click)="onBackClick()"><svg
+                            class="Icon-jx88m3-0 kFxYBq" viewBox="0 0 24 24">
+                            <path fill="#101928" fill-rule="evenodd"
+                                d="M8.707 4.293a1 1 0 00-1.414 0l-7 7A1.006 1.006 0 000 12l.004-.086a1.006 1.006 0 00-.003.054L0 12a1.018 1.018 0 00.146.52 1.035 1.035 0 00.147.187l-.08-.09.007.008.073.082 7 7a1 1 0 001.414-1.414L3.415 13H21a1 1 0 00.993-.883L22 12a1 1 0 00-1-1H3.415l5.292-5.293a1 1 0 00.083-1.32z">
+                            </path>
+                        </svg></a>
+                    <ng-container *ngIf="step === 1"> Choose Service</ng-container>
+                    <ng-container *ngIf="step === 2"> Choose Staff</ng-container>
+                    <ng-container *ngIf="step === 3"> Select Appointment Date</ng-container>
+                    <ng-container *ngIf="step === 4"> Enter User Information</ng-container>
+                    <a class="svg_close" (click)="closeBooking()"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M4.293 4.293a1 1 0 011.414 0L12 10.585l6.293-6.292a1 1 0 011.32-.083l.094.083a1 1 0 010 1.414L13.415 12l6.292 6.293a1 1 0 01.083 1.32l-.083.094a1 1 0 01-1.414 0L12 13.415l-6.293 6.292a1 1 0 01-1.32.083l-.094-.083a1 1 0 010-1.414L10.585 12 4.293 5.707a1 1 0 01-.083-1.32z">
+                            </path>
+                        </svg></a>
+                </h1>
+                <h1></h1>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" [ngStyle]="{'margin-top': step === 5 ? '50px' : '110px' }"
+            style="margin-bottom: 70px;display: flex;">
+            <ng-container *ngIf="step === 1">
+                <div id="div_userbooking_service" class="col-12 col-lg-8 col-md-8 div_userbooking_service">
+                    <ng-container *ngIf="!showServicesLoader; else showServiceLoaderTemplate">
+                        <ng-container
+                            *ngIf="serviceByCatogery != undefined && serviceByCatogery !== null && serviceByCatogery.length > 0; else noserviceByCatogery">
+                            <mat-tab-group [(selectedIndex)]="categoryTabIndex">
+                                <mat-tab label="{{category.catogery.name}}" *ngFor="let category of serviceByCatogery">
+                                    <div id="tab_contents" class="services_list">
+                                        <!--  -->
+                                        <div class="tab_content_items container" id="{{category.catogery.name}}"
+                                            *ngFor="let service of category.services">
+                                            <div class="styled__ServiceHeader row">
+                                                <div class="service_card_item col-1">
+                                                    <mat-checkbox class="custom-frame" [checked]="selectedService !== null && selectedService !== undefined
+                                                && selectedService.id === service.id" [(ngModel)]="service.isSelected"
+                                                        (change)="onServiceSelect(service)">
+                                                    </mat-checkbox>
+                                                    <!-- (change)="onServiceSelect(service)" -->
+                                                </div>
+                                                <div class="service_card_item col-7 tab-sec-width"
+                                                    (click)="onServiceSelectByDivClick(service)"
+                                                    >
+                                                    <p class="service_card_name">{{service.name}}</p>
+                                                    <p class="service-tag-description service-desc">
+                                                        {{service.description}}</p>
+                                                </div>
+                                                <div class="styled__PriceContainer service_card_item col-2"
+                                                    (click)="onServiceSelectByDivClick(service)">
+                                                    <p class="Text-price"><span data-qa="service-card-price" style="word-break: keep-all;"
+                                                            class="styled__PriceContainer-xh73xr-0 dGejKc">{{currencyUnit.symbol}}{{service.price}}</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                            </mat-tab-group>
+                        </ng-container>
+                        <ng-template #noserviceByCatogery>
+                            <div class="tab_contents styled__ShadowContainer">
+                                <div class="col-lg-12">
+                                    <div class="col-lg-12 div_noclient_warning_parent_div">
+                                        <span class="span_placeholder_icon font-size-65px" style="color: #cd1919;"
+                                            data-qa="placeholder-icon">
+                                            <i class="fa fa-ban" aria-hidden="true"></i>
+                                        </span>
+                                        <h3 style="font-size: 34px !important;
+                                    font-weight: 100;
+                                    color: #646262;
+                                    font-family: initial">Sorry, No Services Available
+                                        </h3>
+                                        <!-- <p>No Providers found for {{selectedService.name}}</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ng-container>
+                    <ng-template #showServiceLoaderTemplate>
+                        <ng-container *ngFor='let key of 5 | numberRepeater'>
+                            <ngx-content-loading [speed]="'1500ms'" [width]="1000">
+                                <svg:g ngx-rect width="1000" height="80" y="5" x="0" rx="5" ry="5"></svg:g>
+                            </ngx-content-loading>
+                        </ng-container>
+                    </ng-template>
+                </div>
+
+
+            </ng-container>
+            <ng-container *ngIf="step === 2">
+                <div class="col-lg-8">
+                    <ng-container *ngIf="!showStaffLoader; else showStaffLoaderTemplate">
+                        <div class="tab_contents styled__ShadowContainer">
+                            <ng-container
+                                *ngIf="serviceStaffs !== undefined && serviceStaffs !== null && serviceStaffs.length > 0; else noStaffs">
+                                <div class="provider_content_items" (click)="onStaffSelect(staff)"
+                                    *ngFor="let staff of serviceStaffs">
+                                    <div class="styled__ServiceHeader">
+                                        <div class="service_card_item">
+                                            <div class="styled__AvatarWrapper-wewqsh-1 bnljyj styled__Avatar-sc-151t8rd-0 efrEdv"
+                                                data-qa="staff-avatar">
+                                                <!-- <p class="Text-sc-1qau6jx-0 haLfgX">
+                                                {{getFirstCharOfProviderName(provider.user.firstName)}}</p> -->
+                                                <ng-container
+                                                    *ngIf="staff.user.profileImage === '' 
+                                        || staff.user.profileImage === undefined || staff.user.profileImage === null; else profilePicTemplate">
+                                                    <p class="Text-sc-1qau6jx-0 haLfgX">
+                                                        {{getFirstCharOfStaffName(staff.user.firstName)}}</p>
+                                                </ng-container>
+                                                <ng-template #profilePicTemplate>
+                                                    <img style="height: 100%; width: 100%; object-fit: contain"
+                                                        [src]="staff.user.profileImage" />
+                                                </ng-template>
+                                            </div>
+                                        </div>
+
+                                        <div class="service_card_item tab-sec-width providerName_booking">
+                                            <p class="provider_card_name">{{staff.user.firstName}}
+                                                {{staff.user.lastName}}</p>
+                                            <p class="service-tag-description">{{staff.staffTitle}}</p>
+                                        </div>
+                                        <div class="Flex-f4qjqv-0 styled__ListItemSuffix-sc-19iza46-5 fmMcrw">
+                                            <svg class="Icon-jx88m3-0 jbtsqP Icon-jx88m3-1 cSOsxh" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M10.237 8l-4.998 4.686a.788.788 0 00-.066 1.058.668.668 0 00.988.07l5.6-5.25a.786.786 0 000-1.128l-5.6-5.25a.668.668 0 00-.988.07.788.788 0 00.066 1.058L10.237 8z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                            <ng-template #noStaffs>
+                                <div class="col-lg-12 margin-t-50">
+                                    <div class="col-lg-12 div_noclient_warning_parent_div">
+                                        <span class="span_placeholder_icon font-size-65px" data-qa="placeholder-icon">
+                                            <i class="fa fa-user-md" aria-hidden="true"></i>
+                                        </span>
+                                        <h3>Sorry, No Staffs found</h3>
+                                        <p>No Staffs found for {{selectedService.name}}</p>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </ng-container>
+                    <ng-template #showStaffLoaderTemplate>
+                        <ng-container *ngFor='let key of 5 | numberRepeater'>
+                            <ngx-content-loading [speed]="'1500ms'" [width]="1000">
+                                <svg:g ngx-rect width="1000" height="80" y="5" x="0" rx="5" ry="5"></svg:g>
+                            </ngx-content-loading>
+                        </ng-container>
+                    </ng-template>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="step === 3">
+                <div class="col-lg-8 div_userbooking_service">
+                    <div class="tab_contents styled__ShadowContainer">
+                        <div class="bookingdate_content">
+                            <div class="styled__ServiceHeader">
+                                <div class="service_card_item col-lg-9 col-sm-12 col-xs-12 col-md-12" style="margin-left: auto;
+                                margin-right: auto;">
+                                    <div class="calendar-wrapper">
+                                        <mat-calendar #calendar [minDate]="minDate" [(ngModel)]="selectedDate"
+                                            (selectedChange)="onStartDateChanged($event)" [(selected)]="selectedDate">
+                                        </mat-calendar>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="col-sm-12 styled__ServiceHeader">
+                                <ng-container *ngIf="!showSlotsLoader; else showSlotsLoaderTemplate">
+                                    <div class="tab_contents styled__ShadowContainer" style="width: 100%;">
+                                        <ng-container
+                                            *ngIf="timeSlotsModel !== undefined && timeSlotsModel !== null && timeSlotsModel.length > 0; else noSlots">
+                                            <div class="provider_content_items col-sm-12"
+                                                [ngStyle]="{'background-color': (selectedTimeSlot !== undefined && selectedTimeSlot.timestamp === timeSlot.timestamp) ? 'rgb(234 233 233)': 'initial'}"
+                                                (click)="ontimeSlotSelect(timeSlot)"
+                                                *ngFor="let timeSlot of timeSlotsModel">
+                                                <div class="styled__ServiceHeader">
+                                                    <div class="service_card_item tab-sec-width providerName_booking">
+                                                        <p class="provider_card_name">
+                                                            {{timeSlot.label}}</p>
+                                                        <p class="service-tag-description"></p>
+                                                    </div>
+                                                    <!-- <div class="Flex-f4qjqv-0 styled__ListItemSuffix-sc-19iza46-5 fmMcrw">
+                                                    <svg class="Icon-jx88m3-0 jbtsqP Icon-jx88m3-1 cSOsxh"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M10.237 8l-4.998 4.686a.788.788 0 00-.066 1.058.668.668 0 00.988.07l5.6-5.25a.786.786 0 000-1.128l-5.6-5.25a.668.668 0 00-.988.07.788.788 0 00.066 1.058L10.237 8z">
+                                                        </path>
+                                                    </svg>
+                                                </div> -->
+                                                </div>
+                                            </div>
+                                        </ng-container>
+
+                                        <ng-template #noSlots>
+                                            <div class="col-lg-12">
+                                                <div class="col-lg-12 div_noclient_warning_parent_div"
+                                                    style="margin-bottom: 30px;">
+                                                    <span class="span_placeholder_icon font-size-65px"
+                                                        data-qa="placeholder-icon">
+                                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                    </span>
+                                                    <h3>Sorry, No Time Slots available for the selected date
+                                                        <!-- {{selectedProvider.user.firstName}}
+                                                    {{selectedProvider.user.lastName}} -->
+                                                    </h3>
+                                                    <button (click)="onBackClick()" style="float: inherit !important;"
+                                                        mat-button
+                                                        class="btn_actions button-with-blackcolor float-right btn_min-width box-shadow">
+                                                        Select another staff
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </div>
+                                </ng-container>
+                                <ng-template #showSlotsLoaderTemplate>
+                                    <!-- <ng-container *ngFor='let key of 5 | numberRepeater'> -->
+                                    <mat-spinner color="accent" style="width: 50px;
+                                    height: 50px;
+                                    margin-left: auto;
+                                    margin-right: auto;
+                                    margin-top: 50px;margin-bottom: 50px;" diameter="50">
+                                    </mat-spinner>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="step === 4">
+
+                <div class="col-lg-8 div_userbooking_service user_booking_form_group" style="margin-top: 15px;">
+                    <form [formGroup]="addPatientform">
+                        <div class="tab_contents styled__ShadowContainer"
+                            style="padding: 30px; display: block;padding-bottom: 0px;">
+                            <div class="col-lg-12 form-group user_booking_form_row">
+                                <div class="col-lg-6 user_booking_form_column form-group">
+                                    <mat-form-field appearance="outline" class="example-full-width">
+                                        <mat-label>First Name</mat-label>
+                                        <input required matInput formControlName="firstNameFormControl"
+                                            [(ngModel)]="patient.firstName">
+                                        <mat-error
+                                            *ngIf="addPatientform.controls['firstNameFormControl'].invalid
+                    && (addPatientform.controls['firstNameFormControl'].dirty || addPatientform.controls['firstNameFormControl'].touched)">
+                                            First Name is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-6 user_booking_form_column form-group">
+                                    <mat-form-field appearance="outline" class="example-full-width">
+                                        <mat-label>Last Name</mat-label>
+                                        <input required matInput formControlName="lastNameFormControl"
+                                            [(ngModel)]="patient.lastName">
+                                        <mat-error
+                                            *ngIf="addPatientform.controls['lastNameFormControl'].invalid
+                        && (addPatientform.controls['lastNameFormControl'].dirty || addPatientform.controls['lastNameFormControl'].touched)">
+                                            Last Name is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 form-group">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Mobile Number</mat-label>
+                                    <input required matInput formControlName="mobileNumberFormControl"
+                                        [(ngModel)]="patient.phoneNumber">
+                                    <mat-error *ngIf="addPatientform.controls['mobileNumberFormControl'] !== null && addPatientform.controls['mobileNumberFormControl'].errors !== null && 
+                                addPatientform.controls['mobileNumberFormControl'].errors['required']">
+                                        Phone Number is required
+                                    </mat-error>
+                                    <mat-error *ngIf="addPatientform.controls['mobileNumberFormControl'] !== null && addPatientform.controls['mobileNumberFormControl'].errors !== null && 
+                                addPatientform.controls['mobileNumberFormControl'].errors['pattern']">
+                                        Phone Number is not valid
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-12 form-group">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Email</mat-label>
+                                    <input required matInput formControlName="EmailFormControl"
+                                        [(ngModel)]="patient.email">
+                                    <mat-error *ngIf="addPatientform.controls['EmailFormControl'] !== null && addPatientform.controls['EmailFormControl'].errors !== null && 
+                            addPatientform.controls['EmailFormControl'].errors['required']">
+                                        Email is required
+                                    </mat-error>
+                                    <mat-error *ngIf="addPatientform.controls['EmailFormControl'] !== null && addPatientform.controls['EmailFormControl'].errors !== null && 
+                            addPatientform.controls['EmailFormControl'].errors['pattern']">
+                                        Email is not valid
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="tab_contents styled__ShadowContainer" style="padding-left: 30px;margin-top: 10px;">
+                            <div class="col-lg-12 form-group" style="padding-top: 20px;">
+                                <mat-slide-toggle [(ngModel)]="isTeleMeeting"
+                                    formControlName="isTeleMeetingFormControl">
+                                    Enable Video Conference</mat-slide-toggle>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="step === 5">
+                <div class="container" style="display: block;">
+                    <div class="tab_contents styled__ShadowContainer"
+                        style="display: block;text-align: center;padding: 30px;width: 100%;background-image: linear-gradient(135deg, #6cd5b9 0%, #0cffc5 100%) !important;padding-bottom: 70px;">
+                        <h1><i class="fa fa-check" aria-hidden="true" style="color:white;font-size: 128px;"></i></h1>
+                        <h1 style="color: white;">Your booking has been confirmed</h1>
+                        <span style="color: white;">Confirmation mail has been sent on your registered email
+                            address</span>
+
+                    </div>
+                    <div class="tab_contents col-10 styled__ShadowContainer confirm_booking" style="display: block;text-align: center;padding: 30px;background-color: white !important;margin-left: auto;
+                    margin-right: auto;
+                    position: relative;
+                    bottom: 50px;">
+                        <!-- {{selectedService | json}}
+                    {{selectedProvider | json}}
+                    {{getDateTimeFormat(selectedTimeSlot.timestamp) | date: 'dd MMM yyyy'}} at
+                    {{selectedTimeSlot.label}} -->
+
+                        <div class="col-lg-12" style="text-align: left;display: flex;margin-bottom: 20px;">
+                            <img class="img-circle" style="max-width: 75px;
+                        margin-right: 20px;
+                        min-width: 75px;
+                        object-fit: contain;"
+                                *ngIf="selectedStaff.user.profileImage !== null && selectedStaff.user.profileImage !== undefined && selectedStaff.user.profileImage !== ''"
+                                [src]="selectedStaff.user.profileImage">
+                            <img style="max-width: 75px;
+                        margin-right: 20px;
+                        min-width: 75px;
+                        object-fit: contain;"
+                                *ngIf="selectedStaff.user.profileImage === null || selectedStaff.user.profileImage === undefined || selectedStaff.user.profileImage === ''"
+                                src="assets/images/user.png">
+                            <div style="display: grid;">
+                                <span style="word-break: break-all;">{{selectedStaff.user.fullName}}</span>
+                                <span style="color: #8d8b8b;">{{selectedService.name}}</span>
+                                <span style="color: #8d8b8b;font-family: 'Roboto';">Fees: {{currencyUnit.symbol}}
+                                    {{selectedService.price}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12" style="display: flex;margin-bottom: 15px;text-align: left;">
+                            <div class="col-lg-6" style="color: #8d8b8b;">Name</div>
+                            <div class="col-lg-6" style="color: #373636;">{{this.patient.firstName}}
+                                {{this.patient.lastName}}
+                            </div>
+                        </div>
+                        <div class="col-lg-12" style="display: flex;margin-bottom: 15px;text-align: left;">
+                            <div class="col-lg-6" style="color: #8d8b8b;">Date</div>
+                            <div class="col-lg-6" style="color: #373636;">
+                                {{getDateTimeFormat(selectedTimeSlot.timestamp) |
+                                date: 'dd MMM yyyy'}}
+                            </div>
+                        </div>
+                        <div class="col-lg-12" style="display: flex;text-align: left;">
+                            <div class="col-lg-6" style="color: #8d8b8b;">Time</div>
+                            <div class="col-lg-6" style="color: #373636;">{{selectedTimeSlot.label}}</div>
+                        </div>
+                    </div>
+                    <button (click)="backToHomePage()" style="float: inherit !important;margin-left: auto !important;
+                margin-right: auto !important;
+                display: flex;
+                float: none !important;" mat-button
+                        class="btn_actions button-with-blackcolor float-right btn_min-width box-shadow">
+                        Back To Home Page
+                    </button>
+                </div>
+            </ng-container>
+
+            <div class="col-lg-4 col-10" *ngIf="!showServicesLoader && ((selectedService !== undefined && selectedService !== null) 
+            || (selectedStaff !== undefined && selectedStaff !== null)) && step !== 5"
+                style="border-radius: 8px;">
+                <div class="div_serviceinvoice_main col-4">
+                    <div class="styled__ScrollableSection">
+                        <div class="styled__ShadowContainer">
+                            <div class="styled__EmptyInfoWrapper" *ngIf="!isServiceSelected">
+                                <p class="Text-sc">No services selected yet</p>
+                            </div>
+                            <ul class="styled__List-sc" style="padding-top: 0px;
+                        padding-bottom: 0px;" *ngIf="isServiceSelected">
+                                <li class="styled__ListItem">
+                                    <div class="styled__ListItemContent"
+                                        *ngIf="selectedTimeSlot !== undefined && selectedTimeSlot !== null">
+                                        <p class="Text-sc Text-sc_heading">
+                                            {{getDateTimeFormat(selectedTimeSlot.timestamp) | date: 'dd MMM yyyy'}} at
+                                            {{selectedTimeSlot.label}}</p>
+                                    </div>
+
+                                    <div class="styled__ListItemContent">
+                                        <p class="Text-sc Text-sc_heading">
+                                            {{selectedService.name}}</p>
+                                        <p class="Text-sc">{{selectedService.duration.text}} <ng-container
+                                                *ngIf="selectedStaff !== undefined && selectedStaff !== null">
+                                                with {{selectedStaff.user.firstName}}
+                                                {{selectedStaff.user.lastName}}
+                                            </ng-container>
+                                        </p>
+                                    </div>
+                                    <div class="styled__ListItemSuffix">
+                                        <p class="Text-sc">
+                                            <span data-qa="list-item-retail-price"
+                                                class="styled__PriceContainer-xh73xr-0 dGejKc">{{currencyUnit.symbol}}{{selectedService.price}}</span>
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- <ul class="styled__List-sc" style="padding-top: 0px;
+                        padding-bottom: 0px;" *ngIf="selectedProvider!=undefined">
+                            <li class="styled__ListItem">
+                                <div class="styled__ListItemContent">
+                                    <p class="Text-sc Text-sc_heading">Provider:</p>
+                                    <p class="Text-sc" *ngIf="selectedProvider!=undefined">
+                                        {{selectedProvider.user.firstName}}
+                                        {{selectedProvider.user.lastName}}</p>
+                                </div>
+                            </li>
+                        </ul> -->
+
+                            <ul class="styled__ModifiedList-sc">
+                                <li class="styled__ListItem">
+                                    <div class="styled__ListItemContent">
+                                        <p class="styled__ListItemText-sc">Total</p>
+                                    </div>
+                                    <div class="styled__ListItemSuffix">
+                                        <p class="styled__ListItemText-sc">
+                                            <span class="styled__PriceContainer"
+                                                *ngIf="isServiceSelected">{{currencyUnit.symbol}}{{selectedService.price}}</span>
+                                            <span class="styled__PriceContainer"
+                                                *ngIf="!isServiceSelected && currencyUnit!=undefined ">{{currencyUnit.symbol}}{{0}}</span>
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="WaveBorder__BorderContainer-q11zmv-1 eueyPs">
+                            <div class="WaveBorder__WavePattern-q11zmv-0 iyczUi"></div>
+                        </div>
+                        <div class="WaveBorder__Spacer-q11zmv-2 OcWHK dsVtsd"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="styled__BarWrapper" style="position: fixed; bottom: 55px !important;"
+            *ngIf="showConfirmButton || showStep1Button1 || showStep1Button2 || showStep1Button3 || showStep1Button4">
+            <div class="container">
+                <div>
+                    <!-- [disabled]="!isServiceSelected" -->
+                    <button *ngIf="showStep1Button1" (click)="bookNow()" mat-button
+                        class="btn_actions button-with-blackcolor float-right btn_min-width box-shadow" style="position: relative;
+                    top: 15px;">Next</button>
+
+                    <button *ngIf="showStep1Button2" (click)="bookNow()" mat-button
+                        class="btn_actions button-with-blackcolor float-right btn_min-width box-shadow" style="position: relative;
+                    top: 15px;">Next</button>
+
+                    <button *ngIf="showStep1Button3" (click)="bookNow()" mat-button
+                        class="btn_actions button-with-blackcolor float-right btn_min-width box-shadow" style="position: relative;
+                    top: 15px;">Next</button>
+
+                    <button *ngIf="showStep1Button4" (click)="bookNow()" mat-button
+                        class="btn_actions button-with-blackcolor float-right btn_min-width box-shadow" style="position: relative;
+                    top: 15px;">Next</button>
+
+                    <button form="addPatientform" [disabled]="showSaveLoading" *ngIf="showConfirmButton"
+                        (click)="confirmBooking()" mat-button
+                        class="btn_actions button-with-blackcolor float-right btn_min-width box-shadow" style="position: relative;
+                        top: 15px;">
+                        <ng-container *ngIf="showSaveLoading; else withoutLoader">
+                            Booking...
+                            <mat-icon>
+                                <mat-spinner color="accent" diameter="20">
+                                </mat-spinner>
+                            </mat-icon>
+                        </ng-container>
+
+                        <ng-template #withoutLoader>
+                            Book Now
+                        </ng-template>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <footer class="powered_by_footer" *ngIf="step !== 5">
+            <div class="container">
+                <div style="text-align: center;">
+                    <!-- <div class="copyright"> -->
+                    <p style="position: relative;
+          top: 10px;
+          color: white;">Powered by <a><img style="max-width: 170px;height: 20px;" class="img-fulid"
+                                src="../../../../../assets/images/logo_img1.png" alt=""></a></p>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</div>

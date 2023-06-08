@@ -1,0 +1,17 @@
+<div class="div_parent_modal">
+    <header class="modalheader">
+        <div class="div_modalHeader">
+            <span class="heading_modal">{{modalHeading}}</span>
+        </div>
+    </header>
+
+    <div class="col-lg-12 div_Actionmodal_parent">
+        <span>{{modalBody}}</span>
+    </div>
+
+    <div class="col-lg-12 div_action_inActionpopup">
+        <button mat-button class="btn_actions button-with-blackcolor float-right btn_min-width box-shadow"
+            (click)="OnYesClicked()">YES</button>
+        <button mat-button class="btn_actions float-right btn_min-width box-shadow" (click)="CloseDialog()">NO</button>
+    </div>
+</div>
