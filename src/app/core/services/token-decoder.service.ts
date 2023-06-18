@@ -8,7 +8,8 @@ export class TokenDecoderService {
         var token = localStorage.getItem('jwt');
         if (token !== null && token !== undefined) {
             var decoded = jwt_decode(token);
-            const tenantId = JSON.parse(decoded.TenantId);
+            const tenantId = 1; //add below code later
+            // JSON.parse(decoded.TenantId);
             return tenantId.toString();
         }
 
@@ -19,7 +20,8 @@ export class TokenDecoderService {
         var token = localStorage.getItem('jwt');
         if (token !== null && token !== undefined) {
             var decoded = jwt_decode(token);
-            const userId = JSON.parse(decoded.UserId);
+            const userId = 1; //add below code later 
+            // JSON.parse(decoded.UserId);
             return userId.toString();
         }
 

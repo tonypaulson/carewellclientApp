@@ -44,7 +44,8 @@ export class AuthenticationService extends HttpBaseService {
         const grantType = 'refresh_token';
         const _tokenRequestModel = new TokenRequestModel();
         _tokenRequestModel.grantType = grantType;
-        _tokenRequestModel.tenantId = this.tokenDecoderService.getTenantIdFromJWT();
+        _tokenRequestModel.tenantId =  1;
+        // this.tokenDecoderService.getTenantIdFromJWT();
         _tokenRequestModel.userName = username;
         _tokenRequestModel.refreshToken = refreshToken;
         return this.http.post<any>(`${this.baseUrl}/api/users/authadmin`, _tokenRequestModel).pipe(map(result => {

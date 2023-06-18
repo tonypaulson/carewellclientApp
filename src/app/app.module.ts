@@ -46,6 +46,7 @@ import { GmailLoginComponent } from './components/statelesscomponents/enduser/gm
 import { UserRegisterComponent } from './components/statelesscomponents/enduser/user-register/user-register.component';
 import {CarewellconfirmationComponent} from './components/core/carewellconfirmation/carewellconfirmation.component';
 import { ProviderListingComponent } from './components/statelesscomponents/enduser/provider-listing/provider-listing.component'
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 const components = [EnduserMainComponent,GrdFilterPipe,
   StatelessmainComponent,NotFoundComponent,UserRegisterComponent,GmailLoginComponent,FacebookLoginComponent
@@ -73,7 +74,8 @@ const providers = [MenuChangeListnerService,OnlineBookingService,LoaderService,S
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     MaterialModule,
     BrowserAnimationsModule,
-    NgxContentLoadingModule
+    NgxContentLoadingModule,
+    CarouselModule 
   ],
   entryComponents,
   providers: [

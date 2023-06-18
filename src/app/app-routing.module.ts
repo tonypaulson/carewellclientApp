@@ -6,17 +6,22 @@ import { EnduserMainComponent } from './components/statelesscomponents/enduser/e
 import { StatelessmainComponent } from './components/statelesscomponents/statelessmain/statelessmain.component';
 import { EnduserbookingComponent } from './components/statelesscomponents/enduser/enduserbooking/enduserbooking.component';
 import { NotFoundComponent } from './components/core/components/not-found/not-found.component';
+import { ProviderListingComponent } from './components/statelesscomponents/enduser/provider-listing/provider-listing.component';
 
 const routes: Routes = [
   {
     path: '',
     component: StatelessmainComponent,
     children: [
+      // {
+      //   path: RoutePath.EndUserHome,
+      //   component: EnduserMainComponent,
+      //   pathMatch: 'full',
+      //   canActivate: [TenantGuard]
+      // },
       {
         path: RoutePath.EndUserHome,
-        component: EnduserMainComponent,
-        pathMatch: 'full',
-        canActivate: [TenantGuard]
+        component: ProviderListingComponent
       },
       {
         path: RoutePath.EndUserBooking,

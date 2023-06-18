@@ -1,1 +1,376 @@
-<p>provider-listing works!</p>
+ <!-- Header Section Start -->
+  <header id="hero-area" data-stellar-background-ratio="0.5">
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar indigo">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a style="margin-right: 50px;font-size: 30px;font-family:Roman,LoveloBlack; color:#4274e9" 
+          class="navbar-brand page-scroll" href="#hero-area"><img class="header_logo" src="../../../../../assets/images/ischedule_logo.png" alt=""></a>
+            
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar"
+            aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="lnr lnr-menu"></i>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="main-navbar">
+          <ul class="navbar-nav mr-auto w-100">
+            <!-- justify-content-end -->
+            <li class="nav-item">
+              <a class="nav-link page-scroll" href="#hero-area">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link page-scroll" href="#features">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link page-scroll" href="#industry">Professions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link page-scroll" href="#pricing">Pricing</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link page-scroll" href="#blog">Blogs</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link page-scroll" href="#contact">Contact</a>
+            </li>
+
+            <li class="nav-item" style="margin-left: auto;">
+
+              <a style="border: none;color: #0b3e61;" target="blank" href="https://my.#{Domain}#/admin/login"
+                class="nav-link page-scroll btn btn-common sendEmail">Sign
+                In</a>
+
+              <a style="color: white !important;
+              background: #000 !important;
+              border: #000 !important;" target="blank" href="https://my.#{Domain}#/admin/signup"
+             
+                class="nav-link page-scroll btn btn-common sendEmail">Sign
+                Up</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Start -->
+      <ul class="mobile-menu">
+        <li>
+          <a class="page-scroll" href="#hero-area">Home</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="#features">Features</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="#industry">Professions</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="#pricing">Pricing</a>
+        </li>
+        <!-- <li>
+          <a class="page-scroll" href="#blog">Blogs</a>
+        </li> -->
+        <li>
+          <a class="page-scroll" href="#contact">Contact</a>
+        </li>
+        <li>
+          <a class="page-scroll sendEmail" href="https://my.#{Domain}#/admin/login">Sign
+            In</a>
+        </li>
+        <li>
+          <a class="page-scroll sendEmail" href="https://my.#{Domain}#/admin/signup">Sign
+            Up</a>
+        </li>
+        <!-- <li>
+          <a class="page-scroll btn btn-common wow fadeInUp sendEmail">Sign
+            Up</a>
+        </li> -->
+      </ul>
+      <!-- Mobile Menu End -->
+
+    </nav>
+    <!-- Navbar End -->
+  
+  </header>
+<!-- top providers start -->
+  <section class="bg-color">
+    <div class="containers">
+        <div class="title">
+            <h2><span>Top</span> Providers</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-main">
+                        <div class="discount">-9%</div>
+                        <div class="label label-green">Pre-order</div>
+                        <div class="product-container">
+                            <div class="p" (click)="imageChange1($event)"><img src="../../../../../assets/images/img1.jpg"
+                                    alt="Product"></div>
+                            <div class="p" (click)="imageChange1($event)"><img src="../../../../../assets/images/img2.jpg"
+                                    alt="Product"></div>
+                            <div class="p" (click)="imageChange1($event)"><img src="../../../../../assets/images/img3.jpg"
+                                    alt="Product"></div>
+                        </div>
+                        <div class="image">
+                            <img src="{{url1}}" alt="Product">
+                        </div>
+                        <div class="cart-line"></div>
+                        <div class="cart-item">
+                            <ul>
+                                <!-- <li><a href=""><i class="fa fa-shopping-basket"></i></a></li> -->
+                                <!-- <li><a href=""><i class="fa fa-heart"></i></a></li> -->
+                                <!-- <li><a href=""><i class="fa fa-search"></i></a></li> -->
+                                <li><a href="https://www.google.com/" target="_blank">Book Appointment</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <a href="javascript:void(0);">Wellness Saloon</a>
+                        <div class="rating">
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <p><span class="money">$81.00</span><span class="price-old">$89.00</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-main">
+                        <div class="discount">-10%</div>
+                        <div class="label label-green">Pre-order</div>
+                        <div class="product-container">
+                            <div class="p" (click)="imageChange2($event)"><img src="../../../../../assets/images/img1.jpg" alt="Product"></div>
+                            <div class="p" (click)="imageChange2($event)"><img src="../../../../../assets/images/img2.jpg" alt="Product"></div>
+                            <div class="p" (click)="imageChange2($event)"><img src="../../../../../assets/images/img3.jpg" alt="Product"></div>
+                        </div>
+                        <div class="image">
+                            <img src="{{url2}}" alt="Product">
+                        </div>
+                        <div class="cart-line"></div>
+                        <div class="cart-item">
+                            <ul>
+                                 <!-- <li><a href=""><i class="fa fa-shopping-basket"></i></a></li> -->
+                                <!-- <li><a href=""><i class="fa fa-heart"></i></a></li> -->
+                                <!-- <li><a href=""><i class="fa fa-search"></i></a></li> -->
+                                <li><a href="https://www.google.com/" target="_blank">Book Appointment</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <a href="javascript:void(0);">Cindrella Saloon</a>
+                        <div class="rating">
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <p><span class="money">$81.00</span><span class="price-old">$89.00</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-main">
+                        <div class="discount">-8%</div>
+                        <div class="label label-green">Pre-order</div>
+                        <div class="product-container">
+                            <div class="p" (click)="imageChange3($event)"><img src="../../../../../assets/images/img1.jpg" alt="Product"></div>
+                            <div class="p" (click)="imageChange3($event)"><img src="../../../../../assets/images/img2.jpg" alt="Product"></div>
+                            <div class="p" (click)="imageChange3($event)"><img src="../../../../../assets/images/img3.jpg" alt="Product"></div>
+                        </div>
+                        <div class="image">
+                          <img src="{{url3}}" alt="Product">
+                        </div>
+                        <div class="cart-line"></div>
+                        <div class="cart-item">
+                            <ul>
+                                 <!-- <li><a href=""><i class="fa fa-shopping-basket"></i></a></li> -->
+                                <!-- <li><a href=""><i class="fa fa-heart"></i></a></li> -->
+                                <!-- <li><a href=""><i class="fa fa-search"></i></a></li> -->
+                                <li><a href="https://www.google.com/" target="_blank">Book Appointment</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <a href="javascript:void(0);">Tony&Paulson Saloon</a>
+                        <div class="rating">
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <p><span class="money">$81.00</span><span class="price-old">$89.00</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-main">
+                        <div class="discount">-6%</div>
+                        <div class="label label-green">Pre-order</div>
+                        <div class="product-container">
+                            <div class="p" (click)="imageChange4($event)"><img src="../../../../../assets/images/img1.jpg" alt="Product"></div>
+                            <div class="p" (click)="imageChange4($event)"><img src="../../../../../assets/images/img2.jpg" alt="Product"></div>
+                            <div class="p" (click)="imageChange4($event)"><img src="../../../../../assets/images/img3.jpg" alt="Product"></div>
+                        </div>
+                        <div class="image">
+                          <img src="{{url4}}" alt="Product">
+                        </div>
+                        <div class="cart-line"></div>
+                        <div class="cart-item">
+                            <ul>
+                                 <!-- <li><a href=""><i class="fa fa-shopping-basket"></i></a></li> -->
+                                <!-- <li><a href=""><i class="fa fa-heart"></i></a></li> -->
+                                <!-- <li><a href=""><i class="fa fa-search"></i></a></li> -->
+                                <li><a href="https://www.google.com/" target="_blank">Book Appointment</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <a href="javascript:void(0);">Beautifly Saloon</a>
+                        <div class="rating">
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <p><span class="money">$81.00</span><span class="price-old">$89.00</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- top providers end -->
+<!-- online support section start -->
+<section class="policy">
+  <div class="containers text-center">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="policy-card">
+          <div class="round">
+            <div class="round-icon">
+              <i class="fa fa-car"></i>
+            </div>
+          </div>
+          <h2>Free Shipping &amp; Return</h2>
+          <p>Free Shipping on all UAE Orders</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="policy-card">
+          <div class="round">
+            <div class="round-icon">
+              <i class="fa fa-refresh"></i>
+            </div>
+          </div>
+          <h2>Money Back Policy</h2>
+          <p>30 days money back policy</p>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="policy-card">
+          <div class="round">
+            <div class="round-icon">
+              <i class="fa fa-phone"></i>
+            </div>
+          </div>
+          <h2>Online Support 24h/24h</h2>
+          <p>We support online 24/24 on a day</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section> <!-- online support section end -->
+
+<!-- Providers Carousel start -->
+<section class="policy-product">
+  <div class="containers">
+    <owl-carousel-o [options]="PolicyOptions">
+      <ng-template carouselSlide>
+        <div class="policy-p-card">
+        <div class="date">
+          <h3>25</h3>
+          <h4>Jun</h4>
+        </div>
+        <div class="policy-img">
+          <img src="../../../../../assets/images/render-1.jpg" alt="p1">
+        </div>
+        <h2>Lorem ipsum dolor </h2>
+        <p>sit amet. Et laboriosam magnam eum rerum quod et voluptas illo. Et veniam nesciunt et iste harum et eaque voluptatem. In delectus sint vel galisum perferendis ut itaque repudiandae quo perferendis sunt ea recusandae quod ex dolore minus.</p>
+        <a href="" class="read-more">Read More <i class="fa fa-caret-right"></i></a>
+      </div> 
+    </ng-template>  
+      <ng-template carouselSlide>
+        <div class="policy-p-card">
+          <div class="date">
+            <h3>25</h3>
+            <h4>Jun</h4>
+          </div>
+          <div class="policy-img">
+            <img src="../../../../../assets/images/render-2.jpg" alt="p1">
+          </div>
+          <h2>Lorem ipsum dolor </h2>
+          <p>sit amet. Et laboriosam magnam eum rerum quod et voluptas illo. Et veniam nesciunt et iste harum et eaque voluptatem. In delectus sint vel galisum perferendis ut itaque repudiandae quo perferendis sunt ea recusandae quod ex dolore minus.</p>
+          <a href="" class="read-more">Read More <i class="fa fa-caret-right"></i></a>
+        </div> 
+      </ng-template>  
+      <ng-template carouselSlide>
+        <div class="policy-p-card">
+          <div class="date">
+            <h3>25</h3>
+            <h4>Jun</h4>
+          </div>
+          <div class="policy-img">
+            <img src="../../../../../assets/images/render-3.jpg" alt="p1">
+          </div>
+          <h2>Lorem ipsum dolor </h2>
+          <p>sit amet. Et laboriosam magnam eum rerum quod et voluptas illo. Et veniam nesciunt et iste harum et eaque voluptatem. In delectus sint vel galisum perferendis ut itaque repudiandae quo perferendis sunt ea recusandae quod ex dolore minus.</p>
+          <a href="" class="read-more">Read More <i class="fa fa-caret-right"></i></a>
+        </div> 
+      </ng-template>  
+      <ng-template carouselSlide>
+        <div class="policy-p-card">
+          <div class="date">
+            <h3>25</h3>
+            <h4>Jun</h4>
+          </div>
+          <div class="policy-img">
+            <img src="../../../../../assets/images/render-4.jpg" alt="p1">
+          </div>
+          <h2>Lorem ipsum dolor </h2>
+          <p>sit amet. Et laboriosam magnam eum rerum quod et voluptas illo. Et veniam nesciunt et iste harum et eaque voluptatem. In delectus sint vel galisum perferendis ut itaque repudiandae quo perferendis sunt ea recusandae quod ex dolore minus.</p>
+          <a href="" class="read-more">Read More <i class="fa fa-caret-right"></i></a>
+        </div> 
+      </ng-template>  
+    </owl-carousel-o>
+
+  </div>
+</section>
+<!-- Providers Carousel end -->
+
+<!-- Partner brands carousel start -->
+<section class="partners">
+  <div class="containers">
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide *ngFor="let partnerFile of partnerArray">
+        <img src="{{partnerFile.imgName}}" alt="Partners">
+      </ng-template>  
+     
+    </owl-carousel-o>
+
+  </div>
+</section>
+<!-- Partner brands carousel end -->
+
+
